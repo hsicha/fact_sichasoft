@@ -16,8 +16,8 @@ if (!isset($_SESSION["nombre"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SICHASOFT</title>
-   <!-- Bootstrap -->
-   <link href="../public/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="../public/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../public/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -33,63 +33,22 @@ if (!isset($_SESSION["nombre"]))
             <h2 class="text-center">Bienvenido: <?php echo $_SESSION['nombre']; ?> </h2>
             <div class="row ml-5">
                 <div class="col-lg-6 ">
-                    <!-- page content -->
-                    <div class="right_col" role="main">
-                        <div class="">
-                            <div class="page-title">
-                                <div class="title_left">
-                                    <h3>Plain Page</h3>
-                                </div>
-
-                                <div class="title_right">
-                                    <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search for...">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button">Go!</button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
-
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12  ">
-                                    <div class="x_panel">
-                                        <div class="x_title">
-                                            <h2>Plain Page</h2>
-                                            <ul class="nav navbar-right panel_toolbox">
-                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                </li>
-                                                <li class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                        role="button" aria-expanded="false"><i
-                                                            class="fa fa-wrench"></i></a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Settings 1</a>
-                                                        <a class="dropdown-item" href="#">Settings 2</a>
-                                                    </div>
-                                                </li>
-                                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                </li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="x_content">
-                                            Add content to the page ...
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /page content -->
+                    
                 </div>
             </div>
         </div>
     </div>
+    <!-- jQuery -->
+    <script src="../public/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../public/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="../public/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../public/nprogress/nprogress.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../public/build/js/custom.min.js"></script>
 
 </body>
 
