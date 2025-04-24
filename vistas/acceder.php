@@ -9,105 +9,88 @@ if (!isset($_SESSION["nombre"]))
 }
 
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SichaSoft</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICHASOFT</title>
+   <!-- Bootstrap -->
+   <link href="../public/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../public/css/font-awesome.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../public/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../public/css/_all-skins.min.css">
-    <link rel="apple-touch-icon" href="../public/img/apple-touch-icon.png">
-    <link rel="shortcut icon" href="../public/img/favicon.ico">
+    <link href="../public/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../public/nprogress/nprogress.css" rel="stylesheet">
 
-    <!-- DATATABLES -->
-    <link rel="stylesheet" type="text/css" href="../public/datatables/dataTables.bootstrap4.min.css">    
-    <link href="../public/datatables/buttons.bootstrap4.min.css" rel="stylesheet"/>
-    <link href="../public/datatables/responsive.bootstrap4.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../public/autocomplete/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-select.min.css">
-    
-   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.min.css">
-
+    <!-- Custom Theme Style -->
+    <link href="../public/build/css/custom.min.css" rel="stylesheet">
 </head>
-<body class="hold-transition skin-blue ">
- <div class="content">
- 	     <h2 class="page-header text-center">BIENVENIDO: <?php echo $_SESSION['nombre']; ?> </h2>
 
-      <div class="row">
-        <div class="col-md-4">
-          <!-- Widget: user widget style 1 -->
-          <div class="box box-widget widget-user-2">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-yellow">
-              <div class="widget-user-image">
-                <img class="img-circle" src="../files/logos/<?php echo $_SESSION["logo_empresa"]; ?>" alt="User Avatar" style="height:50px; width:50px">
-              </div>
-              <!-- /.widget-user-image -->
-              <h3 class="widget-user-username"><?php echo $_SESSION["nombre_comercial"] ?></h3>
-              <h5 class="widget-user-desc"><?php echo $_SESSION['nombre_empresa']; ?> </h5>
-            </div>
-            <div class="box-footer no-padding">
-              <ul class="nav nav-stacked">
-                <li><a href="#">RUC: <?php echo $_SESSION["ruc_empresa"]?> <span class="pull-right badge bg-blue"><i class="fa fa-list-ol" aria-hidden="true"></i></span></a></li>
-                <li><a href="#">DIRECCION: <span class="pull-right badge bg-aqua"><i class="fa fa-map-marker" aria-hidden="true"></i></span><?php echo $_SESSION["direccion_empresa"]?> </a></li>
-                <li><a href="#">TEL/CEL: <?php echo $_SESSION["tel_empresa"] ?> <span class="pull-right badge bg-green"><i class="fa fa-phone" aria-hidden="true"></i></span></a></li>
-                <li><a href="../ajax/usuario.php?op=salir" class=""> CERRAR SESION <span class="pull-right badge bg-red"><i class="fa fa-sign-out" aria-hidden="true"></i></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- /.widget-user -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-8">
-          <div class="box box-widget widget-user-2">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-yellow text-center">
-              
-              <!-- /.widget-user-image -->
-              <h3 class="widget-user-username text-center">SUCURSALES ASIGNADOS</h3>
-        	<h5 class="widget-user-desc ">SELECCIONE UN SUCURSAL PARA ACCEDER PARA USAR EL SISTEMA</h5>
-            </div>
-            <div class="box-footer no-padding">
-              <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado_sucursal" class="table table-striped table-bordered table-condensed table-hover">
-                          <thead class="bg-aqua">
-                            <th>N°</th>
-                            <th>SUCURSAL</th>
-                            <th>ACCEDER</th>
-                          </thead>
-                          <tbody>                            
-                          </tbody>
-                        
-                        </table>
+<body class="login">
+    <div class="container body">
+        <div class="main_container ">
+            <h2 class="text-center">Bienvenido: <?php echo $_SESSION['nombre']; ?> </h2>
+            <div class="row ml-5">
+                <div class="col-lg-6 ">
+                    <!-- page content -->
+                    <div class="right_col" role="main">
+                        <div class="">
+                            <div class="page-title">
+                                <div class="title_left">
+                                    <h3>Plain Page</h3>
+                                </div>
+
+                                <div class="title_right">
+                                    <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search for...">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button">Go!</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12  ">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h2>Plain Page</h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                        role="button" aria-expanded="false"><i
+                                                            class="fa fa-wrench"></i></a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#">Settings 1</a>
+                                                        <a class="dropdown-item" href="#">Settings 2</a>
+                                                    </div>
+                                                </li>
+                                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            Add content to the page ...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- /page content -->
+                </div>
             </div>
-          </div>
-         
-          <!-- /.widget-user -->
         </div>
+    </div>
 
-        <!-- /.col -->
-      </div>
- </div>
-<?php
+</body>
 
-require 'footer.php';
-?>
-
-<script type="text/javascript" src="scripts/acceder.js"></script>
-<?php 
-
-ob_end_flush();
-?>
+</html>
