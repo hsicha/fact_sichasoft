@@ -12,11 +12,11 @@
         <section class="col-md-4 mt-2">
             <div class="card shadow-sm">
                 <div class="card-body bg-primary text-white">
-                    <h5 class="card-title font-weight-bold text-start">Total ventas hoy</h5>
-                    <h2 id="total_ventas_hoy" class="fw-bold h2 font-weight-bold text-right"></h2>
+                    <h5 class="card-title font-weight-bold text-start">Compras</h5>
+                    <h2 id="total_ventas_hoy" class="fw-bold h2 font-weight-bold text-right">10</h2>
                     <div class="d-flex justify-content-between align-items-center">
                         <i class="fa fa-cutlery ft-icon"></i>
-                        <p class="card-text h6">+5% más que ayer</p>
+                        <a href="http://" class="text-white text-weight-bold"> NUEVA COMPRA</a>
                     </div>
                 </div>
             </div>
