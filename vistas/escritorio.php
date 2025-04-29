@@ -1,260 +1,199 @@
 <?php
-//Activamos el almacenamiento en el buffer
-ob_start();
-session_start();
-
-if (!isset($_SESSION["nombre"]))
-{
-  header("Location: login.html");
-}
-else
-{
-require 'header.php';
-
-if ($_SESSION['escritorio']==1)
-{
-  require_once "../modelos/Consultas.php";
-  $consulta = new Consultas();
-  $rsptac = $consulta->totalcomprahoy();
-  $regc=$rsptac->fetch_object();
-  $totalc=$regc->total_compra;
- $id_sede=$_SESSION['idsede'];
-  $rsptav = $consulta->totalventahoy($id_sede);
-  $regv=$rsptav->fetch_object();
-  $totalv=$regv->total_venta;
-
-  //Datos para mostrar el gráfico de barras de las compras
-  $compras10 = $consulta->comprasultimos_10dias();
-  $fechasc='';
-  $totalesc='';
-  while ($regfechac= $compras10->fetch_object()) {
-    $fechasc=$fechasc.'"'.$regfechac->fecha .'",';
-    $totalesc=$totalesc.$regfechac->total .','; 
-  }
-
-  //Quitamos la última coma
-  $fechasc=substr($fechasc, 0, -1);
-  $totalesc=substr($totalesc, 0, -1);
-
-   //Datos para mostrar el gráfico de barras de las ventas
-  $ventas12 = $consulta->ventasultimos_12meses();
-  $fechasv='';
-  $totalesv='';
-  while ($regfechav= $ventas12->fetch_object()) {
-    $fechasv=$fechasv.'"'.$regfechav->fecha .'",';
-    $totalesv=$totalesv.$regfechav->total .','; 
-  }
-
-  //Quitamos la última coma
-  $fechasv=substr($fechasv, 0, -1);
-  $totalesv=substr($totalesv, 0, -1);
-
+ require 'header.php';
 ?>
-<!--Contenido-->
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">        
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-              <div class="col-md-12">
-                  <div class="box">
-                    <div class="box-header with-border">
-                          <h1 class="box-title">Escritorio </h1>
-                        <div class="box-tools pull-right">
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- centro -->
-                    <div class="panel-body">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          <div class="small-box bg-aqua">
-                              <div class="inner">
-                                <h4 style="font-size:17px;">
-                                  <strong>S/ <?php echo $totalc; ?></strong>
-                                </h4>
-                                <p>Compras</p>
-                              </div>
-                              <div class="icon">
-                                <i class="ion ion-bag"></i>
-                              </div>
-                              <a href="ingreso.php" class="small-box-footer">Compras <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          <div class="small-box bg-green">
-                              <div class="inner">
-                                <h4 style="font-size:17px;">
-                                  <strong>S/ <?php echo $totalv; ?></strong>
-                                </h4>
-                                <p>Ventas</p>
-                              </div>
-                              <div class="icon">
-                                <i class="ion ion-bag"></i>
-                              </div>
-                              <a href="venta.php" class="small-box-footer">Ventas <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                       
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <div class="box box-danger">
-                              <div class="box-header with-border bg-red">
-                                Productos con poco Stock
-                              </div>
-                              <div class="box-body">
-                               <!-- <canvas id="ventas" width="400" height="300"></canvas>-->
-                        
-                               	 <div class="panel-body table-responsive" id="listadoregistros">
-			                        <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
-			                          <thead>
-			                            <th>Código</th>
-			                            <th>Producto</th>
-			                            <th>Marca</th>
-			                            <th>Stock</th>
-			                          </thead>
-			                          <tbody>                            
-			                          </tbody>
-			                        
-			                        </table>
-                    			</div>
-                         
-                              
-                        
-                              </div>
-                          </div>
-                        </div>
-                    </div>
-                    <!--Fin centro -->
-                  </div><!-- /.box -->
-              </div><!-- /.col -->
-          </div><!-- /.row -->
-      </section><!-- /.content -->
 
-    </div><!-- /.content-wrapper -->
-  <!--Fin-Contenido-->
+<!-- libreria chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<main class="right_col" role="main">
+    <!-- tarjetas -->
+    <div class="row">
+        <!-- total ventas -->
+        <section class="col-md-4 mt-2">
+            <div class="card shadow-sm">
+                <div class="card-body bg-primary text-white">
+                    <h5 class="card-title font-weight-bold text-start">Total ventas hoy</h5>
+                    <h2 id="total_ventas_hoy" class="fw-bold h2 font-weight-bold text-right"></h2>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <i class="fa fa-cutlery ft-icon"></i>
+                        <p class="card-text h6">+5% más que ayer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- dinero recaudado -->
+        <section class="col-md-4 mt-2">
+            <div class="card shadow-sm">
+                <div class="card-body bg-success text-white">
+                    <h5 class="card-title font-weight-bold">Total dinero hoy</h5>
+                    <h2 id="total_dinero_hoy" class="fw-bold text-right h2 font-weight-bold"></h2>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <i class="fa fa-money ft-icon"></i>
+                        <p class="card-text h6" id="porcentaje_dinero"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- deliverys entregados -->
+        <section class="col-md-4 mt-2">
+            <div class="card shadow-sm">
+                <div class="card-body bg-danger text-white">
+                    <h5 class="card-title font-weight-bold">Total delivery hoy</h5>
+                    <h2 id="total_delivery_hoy" class="fw-bold text-right h2 font-weight-bold"></h2>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <i class="fa fa-motorcycle ft-icon"></i>
+                        <p class="card-text h6" id="">+3% más que ayer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="row">
+        <!-- grafico -->
+        <section class="col-md-6 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-bar-chart ft-dark-icon"> </i>
+                    <span class="h6 text-body font-weight-bold ml-2">Ventas de la semana</span>
+                </div>
+                <div class="card-body">
+                    <canvas id="pedidosChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- tabla ordenes -->
+        <section class="col-md-6 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-bell ft-dark-icon"></i> <span class="h6 text-body font-weight-bold ml-2">Ordenes
+                        recientes</span>
+                </div>
+                <!-- tabla -->
+                <table class="table table-hover">
+                    <tbody>
+                        <tr data-toggle="modal" data-target="#modalInfo">
+                            <td><i class="fa fa-inbox"></i></td>
+                            <td>Nueva orden solicitada</td>
+                            <td>Hace un instante</td>
+                        </tr>
+                        <tr data-toggle="modal" data-target="#modalInfo">
+                            <td><i class="fa fa-inbox"></i></td>
+                            <td>Nueva orden solicitada</td>
+                            <td>Hace 02 minutos</td>
+                        </tr>
+                        <tr data-toggle="modal" data-target="#modalInfo">
+                            <td><i class="fa fa-inbox"></i></td>
+                            <td>Nueva orden solicitada</td>
+                            <td>Hace 03 minutos</td>
+                        </tr>
+                        <tr data-toggle="modal" data-target="#modalInfo">
+                            <td><i class="fa fa-inbox"></i></td>
+                            <td>Nueva orden solicitada</td>
+                            <td>Hace 04 minutos</td>
+                        </tr>
+                        <tr data-toggle="modal" data-target="#modalInfo">
+                            <td><i class="fa fa-inbox"></i></td>
+                            <td>Nueva orden solicitada</td>
+                            <td>Hace 05 minutos</td>
+                        </tr>
+                        <tr data-toggle="modal" data-target="#modalInfo">
+                            <td><i class="fa fa-inbox"></i></td>
+                            <td>Nueva orden solicitada</td>
+                            <td>Hace 06 minutos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- detalle ordenes -->
+        <div class="modal" id="modalInfo">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detalle de la orden</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Comanda</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Detalles</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>P001</td>
+                                    <td>Yuquitas fritas</td>
+                                    <td>2</td>
+                                    <td>Bien fritas, con sal y para llevar.</td>
+                                    <td><span class="badge badge-danger">Pendiente</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        // Datos de pedidos
+        var pedidosData = {
+            labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+            datasets: [{
+                label: 'Total de ventas ($)',
+                data: [150, 200, 180, 220, 250, 300, 190], // Ventas de cada día
+                backgroundColor: 'rgba(0, 123, 255, 0.8)', // Color de las barras
+                borderColor: 'rgba(0, 123, 255, 1)', // Color del borde
+                borderWidth: 1
+            }]
+        };
+
+        // Opciones del gráfico
+        var pedidosOptions = {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 50
+                    }
+                }
+            }
+        };
+
+        // Crear gráfico
+        var ctx = document.getElementById('pedidosChart').getContext('2d');
+        var pedidosChart = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico (barras)
+            data: pedidosData,
+            options: pedidosOptions
+        });
+        </script>
+
+
+        <!-- Bootstrap JS y dependencias -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+
+</main>
 <?php
-}
-else
-{
-  require 'noacceso.php';
-}
-
-require 'footer.php';
+ include '../vistas/footer.php';
 ?>
 
-<script src="../public/js/chart.min.js"></script>
-<script src="../public/js/Chart.bundle.min.js"></script> 
-
-<script type="text/javascript" src="scripts/escritorio.js"></script>
-    
-<script type="text/javascript">
-
-
-
-	 /*
-
-
-var ctx = document.getElementById("compras").getContext('2d');
-var compras = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [<?php echo $fechasc; ?>],
-        datasets: [{
-            label: 'Compras en S/ de los últimos 10 días',
-            data: [<?php echo $totalesc; ?>],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-
-var ctx = document.getElementById("ventas").getContext('2d');
-var ventas = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: <?php echo $fechasv; ?>],
-        datasets: [{
-            label: 'Ventas en S/ de los últimos 12 Meses',
-            data: [<?php echo $totalesv; ?>],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-*/
-</script>
-
-
-
-
-<?php 
-}
-ob_end_flush();
-?>
-
-
+<script src="scripts/escritorio.js"></script>

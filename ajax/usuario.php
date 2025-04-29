@@ -344,7 +344,9 @@ switch ($_GET["op"]){
 			$data[]=array(
 			"0"=>$reg->nro,
 			"1"=>$reg->NOMBRE_SEDE,
-			"2"=>'<span class="label bg-yellow  text-center"><a style="color:white;cursor:pointer" onclick="acceder('.$reg->idusuario.','.$reg->idusuario_sede.')"><i class="fa fa-arrow-right" aria-hidden="true"></i> INGRESAR</a></span>' ,);
+			"2"=>'<span class="text-white" 	style="cursor:pointer"><a  class="badge badge-danger badge-pill" onclick="acceder('.$reg->idusuario.','.$reg->idusuario_sede.')"><i class="fa fa-sign-out"
+                                            aria-hidden="true"></i>	INGRESAR </a> </span>'
+			);
 		}
 		$results = array(
 		 			"sEcho"=>1, //Información para el datatables
