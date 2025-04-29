@@ -50,7 +50,7 @@ if (strlen(session_id()) < 1)
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title">
-                        <a href="home.php" class="site_title"><i class="fa fa-desktop" aria-hidden="true"></i>
+                        <a href="escritorio.php" class="site_title"><i class="fa fa-desktop" aria-hidden="true"></i>
                             <span><?php echo $_SESSION["nombre_comercial"] ?></span></a>
                     </div>
 
@@ -61,7 +61,7 @@ if (strlen(session_id()) < 1)
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                          <?php if($_SESSION["escritorio"] == 1)
+                            <?php if($_SESSION["escritorio"] == 1)
                           { 
                            echo '<ul class="nav side-menu">
                                 <li>
@@ -72,49 +72,124 @@ if (strlen(session_id()) < 1)
                             </ul>';
                           }
                             ?>
-                            
+
                             <ul class="nav side-menu">
-                              
-                                <li><a><i class="fa fa-cog" aria-hidden="true"></i> Ajustes <span
+                                <?php 
+            if ($_SESSION['acceso']==1)
+            {
+                echo ' <li><a><i class="fa fa-cog" aria-hidden="true"></i> Acceso <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="empresa.php">Empresa</a></li>
                                         <li><a href="perfil.php">Perfiles</a></li>
-                                        <li><a href="usuarios.php">Usuarios</a></li>
-                                        <li><a href="mesa.php">Mesas</a></li>
+                                        <li><a href="usuario.php">Usuarios</a></li>
+                                        <li><a href="usuario_sede.php">Usuario Sede</a></li>
+                                        <li><a href="empresa.php">Empresas</a></li>
+                                        <li><a href="sedes.php">Sedes</a></li>
+
                                     </ul>
-                                </li>
+                                </li>';
+            }
+            ?>
 
-                              
 
-                        
-
+                                <?php 
+            if ($_SESSION['almacen']==1)
+            {
+              echo '
                                 <li><a><i class="fa fa-archive"></i> Almacén <span
 
-                                            class="fa fa-chevron-down"></span></a>
+                                    class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="categorias.php">Categorias</a></li>
-                                        <li><a href="menu.php">Productos</a></li>
+                                        <li><a href="categoria.php">Categorias</a></li>
+                                        <li><a href="marca.php">Marcas</a></li>
+                                        <li><a href="articulo.php">Productos</a></li>
                                     </ul>
-                                </li>
-                                <li><a><i class="fa fa-arrow-down"></i> Ingresos <span
+                                </li>';
+            }
+            ?>
+                                <?php 
+            if ($_SESSION['compras']==1)
+            {
+              echo '<li><a><i class="fa fa-cart-plus" aria-hidden="true"></i> Compras <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
 
                                         <li><a href="proveedor.php">Proveedores</a></li>
-                                        <li><a href="ingreso.php">Nuevo Ingreso</a></li>
+                                        <li><a href="ingreso.php">Compras</a></li>
 
                                     </ul>
-                                </li>
-                                <li><a><i class="fa fa-bar-chart"></i> Reportes <span
+                                </li>';
+            }
+            ?>
+                                <?php
+
+            if($_SESSION['tipodoc']==1){
+            echo   ' <li id="ltipodoc"> <a href="tipodoc.php">
+                    <i class="fa fa-file-text" aria-hidden="true"></i> <span>Tipo Documento</span>
+                    </a>
+                    </li>';
+
+            }
+            ?>
+                                <?php 
+            if ($_SESSION['ventas']==1)
+            {
+              echo '<li><a><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Ventas <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
 
-                                        <li><a href="reporte_general.php">General</a></li>
-                                        <li><a href="reporte_fecha.php">Reportes por Fecha</a></li>
+                                        <li><a href="cliente.php">Clientes</a></li>
+                                        <li><a href="venta.php">Ventas</a></li>
 
                                     </ul>
-                                </li>
+                                </li>';
+            }
+            ?>
+                                <?php 
+            if ($_SESSION['orden_serv']==1)
+            {
+              echo '<li><a><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Orden Servicio <span
+                                            class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+
+                                        <li><a href="orden_servicio.php">Nuevo</a></li>
+                                        <li><a href="estado_orden.php">Estado</a></li>
+                                        <li><a href="tipo_servicio.php">Consultas</a></li>
+
+                                    </ul>
+                                </li>';
+            }
+            ?>
+            <?php 
+                        if ($_SESSION['consultac']==1)
+                        {
+                            echo '<li><a><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Reporte Compras <span
+                            class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+
+                        <li><a href="comprasfecha.php">Reporte General</a></li>
+                     
+
+                    </ul>
+                </li>';
+                        }
+                        ?>
+                         <?php 
+            if ($_SESSION['consultav']==1)
+            {
+                echo '<li><a><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Reporte Ventas <span
+                class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+
+            <li><a href="ventasfechacliente.php">Reporte General</a></li>
+         
+
+        </ul>
+    </li>';
+            }
+            ?>
+
+                              
                             </ul>
                         </div>
 
@@ -139,9 +214,13 @@ if (strlen(session_id()) < 1)
                                     data-toggle="dropdown" aria-expanded="false" style="font-size: 20px;">
                                     <i class="fa fa-user" style="font-size: 28px;"></i>
                                 </a>
-                                <div class="dropdown-menu dropdown-usermenu pull-right"
+                                <div class="dropdown-menu dropdown-usermenu pull-right bg-success"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item btn btn-default" href="#"> Perfil</a>
+                                    <span class="dropdown-item"><?php echo $_SESSION['nombre']; ?></span>
+                                    <span class="dropdown-item">SUCURSAL <?php echo $_SESSION['sede']; ?></span>
+                                    <a class="dropdown-item btn btn-default "
+                                        href="../vistas/acceder.php"><i
+                                            class="fa fa-sign-out pull-right"></i> Cambiar Sucursal</a>
                                     <a class="dropdown-item btn btn-default"
                                         href="../controller/usuario.php?op=salir"><i
                                             class="fa fa-sign-out pull-right"></i> Cerrar sesión</a>
