@@ -325,7 +325,11 @@ public function listar($id_sede){
 		$sql="SELECT letras('$numero','$moneda') as letter";
 		return ejecutarConsultaSimpleFila($sql);
 	}
-	 
+	public function total_ventas_por_sede($id_sede){
+		$sql="SELECT count(*) AS total_realizadas, SUM(total_venta) AS total FROM venta where id_sede='$id_sede'";
+		return ejecutarConsultaSimpleFila($sql);
+	}
+
 	
 }
 ?>

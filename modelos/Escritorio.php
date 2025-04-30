@@ -7,5 +7,6 @@
 			WHERE codigo_almacen='$codigo_almacen' AND stock<=10";
 		return ejecutarConsulta($sql);		
 	}
+	
 
 ?>

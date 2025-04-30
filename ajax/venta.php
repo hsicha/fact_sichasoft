@@ -297,6 +297,11 @@ case 'llenar_combo_tipo_ope':
 				}
 	break;
 
+	case 'total_ventas_sede':
+		$rspta=$venta->total_ventas_por_sede($idsede);
+		//Codificar el resultado utilizando json
+		echo json_encode($rspta);
+		break;
 
 		// 
 

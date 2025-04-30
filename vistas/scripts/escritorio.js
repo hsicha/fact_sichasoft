@@ -1,6 +1,7 @@
 var tabla;
 function init() {
 	listar();
+  total_venta_sede();
 	
 }
 function listar()
@@ -34,5 +35,15 @@ function listar()
     },
   
   });
+}
+function total_venta_sede(){
+  $.post("../ajax/venta.php?op=total_ventas_sede",
+  function(data, status){
+    dataJson = JSON.parse(data);
+    console.log(data);
+    $("#total_venta").html("S/. " +dataJson.total);
+    $("#total_realizadas").html(dataJson.total_realizadas);
+  })
+
 }
 init();

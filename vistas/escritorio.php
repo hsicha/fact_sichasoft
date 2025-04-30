@@ -1,54 +1,106 @@
 <?php
  require 'header.php';
 ?>
+<style>
+    body{
+    margin-top:20px;
+    background:#FAFAFA;
+}
+.order-card {
+    color: #fff;
+}
 
+.bg-c-blue {
+    background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
+
+.bg-c-green {
+    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+}
+
+.bg-c-yellow {
+    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
+
+.bg-c-pink {
+    background: linear-gradient(45deg,#FF5370,#ff869a);
+}
+
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.card .card-block {
+    padding: 25px;
+}
+
+.order-card i {
+    font-size: 26px;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}
+</style>
 <!-- libreria chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <main class="right_col" role="main">
     <!-- tarjetas -->
     <div class="row">
-        <!-- total ventas -->
-        <section class="col-md-4 mt-2">
-            <div class="card shadow-sm">
-                <div class="card-body bg-primary text-white">
-                    <h5 class="card-title font-weight-bold text-start">Compras</h5>
-                    <h2 id="total_ventas_hoy" class="fw-bold h2 font-weight-bold text-right">10</h2>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <i class="fa fa-cutlery ft-icon"></i>
-                        <a href="http://" class="text-white text-weight-bold"> NUEVA COMPRA</a>
-                    </div>
+    <div class="col-md-4 col-xl-3">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Compras</h6>
+                    <h2 class="text-right"> <a href="ingreso.php" class="text-white"><i class="fa fa-cart-plus f-left"></i></a><span>S/. 486</span></h2>
+                    <p class="m-b-0">Compras Realizadas<span class="f-right">351</span></p>
                 </div>
             </div>
-        </section>
-        <!-- dinero recaudado -->
-        <section class="col-md-4 mt-2">
-            <div class="card shadow-sm">
-                <div class="card-body bg-success text-white">
-                    <h5 class="card-title font-weight-bold">Total dinero hoy</h5>
-                    <h2 id="total_dinero_hoy" class="fw-bold text-right h2 font-weight-bold"></h2>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <i class="fa fa-money ft-icon"></i>
-                        <p class="card-text h6" id="porcentaje_dinero"></p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <!-- deliverys entregados -->
-        <section class="col-md-4 mt-2">
-            <div class="card shadow-sm">
-                <div class="card-body bg-danger text-white">
-                    <h5 class="card-title font-weight-bold">Total delivery hoy</h5>
-                    <h2 id="total_delivery_hoy" class="fw-bold text-right h2 font-weight-bold"></h2>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <i class="fa fa-motorcycle ft-icon"></i>
-                        <p class="card-text h6" id="">+3% más que ayer</p>
-                    </div>
+        <div class="col-md-4 col-xl-3">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Ventas</h6>
+                    <h2 class="text-right"> <a href="venta.php" class="text-white"><i class="fa fa-cart-plus f-left"></i></a><span id="total_venta"></span></h2>
+                    <p class="m-b-0">Ventas Realizadas<span class="f-right" id="total_realizadas">351</span></p>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <div class="col-md-4 col-xl-3">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Proveedores</h6>
+                    <h2 class="text-right"> <a href="proveedor.php" class="text-white"><i class="fa fa-users f-left"></i></a><span>S/. 486</span></h2>
+                    <p class="m-b-0">...<span class="f-right">...</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xl-3">
+            <div class="card bg-c-pink order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Clientes</h6>
+                    <h2 class="text-right"> <a href="venta.php" class="text-white"><i class="fa fa-users f-left"></i></a><span>S/. 486</span></h2>
+                    <p class="m-b-0">...<span class="f-right">...</span></p>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
     <div class="row">
         <!-- grafico -->
         <section class="col-md-6 mt-4">
