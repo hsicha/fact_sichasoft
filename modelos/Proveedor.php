@@ -61,6 +61,11 @@ Class Proveedor
 		$sql="select idproveedor from proveedor where nro_documento='$num_doc'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
+	public function total_proveedor(){
+		$sql="select count(*) as total from proveedor";
+	
+		return ejecutarConsultaSimpleFila($sql);
+	}
 	
 }
 

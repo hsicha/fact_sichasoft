@@ -97,7 +97,11 @@ switch ($_GET["op"]){
 					echo '<option value=' . $reg->cod_tipo_doc. '>' . $reg->descripcion_documento. '</option>';
 				}
 	break;
-
+case 'total_clientes':
+		$rspta=$cliente->total_clientes();
+ 		//Codificar el resultado utilizando json
+ 		echo json_encode($rspta);
+	break;
 
 }
 //Fin de las validaciones de acceso

@@ -63,8 +63,8 @@
             <div class="card bg-c-blue order-card">
                 <div class="card-block">
                     <h6 class="m-b-20">Compras</h6>
-                    <h2 class="text-right"> <a href="ingreso.php" class="text-white"><i class="fa fa-cart-plus f-left"></i></a><span>S/. 486</span></h2>
-                    <p class="m-b-0">Compras Realizadas<span class="f-right">351</span></p>
+                    <h2 class="text-right"> <a href="ingreso.php" class="text-white"><i class="fa fa-cart-plus f-left"></i></a><span id="total_compras">S/. 486</span></h2>
+                    <p class="m-b-0">Compras Realizadas<span class="f-right" id="total_compras_realzadas">0</span></p>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
             <div class="card bg-c-yellow order-card">
                 <div class="card-block">
                     <h6 class="m-b-20">Proveedores</h6>
-                    <h2 class="text-right"> <a href="proveedor.php" class="text-white"><i class="fa fa-users f-left"></i></a><span>S/. 486</span></h2>
+                    <h2 class="text-right"> <a href="proveedor.php" class="text-white"><i class="fa fa-users f-left"></i></a><span id="total_proveedores">0</span></h2>
                     <p class="m-b-0">...<span class="f-right">...</span></p>
                 </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="card bg-c-pink order-card">
                 <div class="card-block">
                     <h6 class="m-b-20">Clientes</h6>
-                    <h2 class="text-right"> <a href="venta.php" class="text-white"><i class="fa fa-users f-left"></i></a><span>S/. 486</span></h2>
+                    <h2 class="text-right"> <a href="venta.php" class="text-white"><i class="fa fa-users f-left"></i></a><span id="total_clientes"></span></h2>
                     <p class="m-b-0">...<span class="f-right">...</span></p>
                 </div>
             </div>

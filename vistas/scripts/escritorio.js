@@ -2,6 +2,9 @@ var tabla;
 function init() {
 	listar();
   total_venta_sede();
+  total_compras_sede();
+  total_proveedores();
+  total_clientes();
 	
 }
 function listar()
@@ -45,5 +48,31 @@ function total_venta_sede(){
     $("#total_realizadas").html(dataJson.total_realizadas);
   })
 
+}
+function total_compras_sede(){
+  $.post("../ajax/ingreso.php?op=total_compras_sede",
+  function(data, status){
+    dataJson = JSON.parse(data);
+    console.log(data);
+    $("#total_compras").html("S/. " +dataJson.total);
+    $("#total_compras_realzadas").html(dataJson.total_compras);
+  })
+}
+function total_proveedores(){
+  $.post("../ajax/proveedor.php?op=total_proveedores",
+  function(data, status){
+    dataJson = JSON.parse(data);
+    console.log(data);
+    $("#total_proveedores").html(dataJson.total);
+  })
+
+}
+function total_clientes(){
+  $.post("../ajax/cliente.php?op=total_clientes",
+  function(data, status){
+    dataJson = JSON.parse(data);
+    console.log(data);
+    $("#total_clientes").html(dataJson.total);
+  })
 }
 init();

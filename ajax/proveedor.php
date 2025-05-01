@@ -94,6 +94,10 @@ switch ($_GET["op"]){
 					echo '<option value=' . $reg->cod_tipo_doc. '>' . $reg->descripcion_documento. '</option>';
 				}
 	break;
+	case "total_proveedores":
+		$rspta=$proveedor->total_proveedor();
+		echo json_encode($rspta);
+		break;
 
 
 }

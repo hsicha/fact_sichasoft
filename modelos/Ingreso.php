@@ -132,7 +132,10 @@ Class Ingreso
 	return ejecutarConsulta($sql);
 	}
 
-	
+	function total_compras_por_sede($idesde){
+		$sql="select count(*) as total_compras,sum(total_compra) as total from ingreso where ID_SEDE='$idesde'";
+		return ejecutarConsultaSimpleFila($sql);
+	}
 
 
 

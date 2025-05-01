@@ -145,7 +145,9 @@ switch ($_GET["op"]){
 				}
 				echo json_encode($data,JSON_UNESCAPED_UNICODE);
 		break;
-		
+		case 'total_compras_sede':
+				$rpta=$ingreso->total_compras_por_sede($idsede);
+				echo json_encode($rpta);
 }
 
 

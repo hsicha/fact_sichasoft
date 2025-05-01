@@ -61,6 +61,10 @@ Class Cliente
 		$sql="select idcliente from clientes where num_documento='$num_doc'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
+	function total_clientes(){
+		$sql="select count(*) as total from clientes";
+		return ejecutarConsultaSimpleFila($sql);
+	}
 }
 
 ?>
