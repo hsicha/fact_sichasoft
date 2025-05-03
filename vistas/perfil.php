@@ -1,98 +1,99 @@
 <?php
-
-//Activamos el almacenamiento en el buffer
-ob_start();
-session_start();
-
-if (!isset($_SESSION["nombre"]))
-{
-  header("Location: login.html");
-}
-else
-{
-require 'header.php';
-
-if ($_SESSION['almacen']==1)
-{
+ require 'header.php';
 ?>
-<!--Contenido-->
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">        
-        <!-- Main content -->
-        <section class="content">
+ <div class="right_col" role="main">
+          <div class="">
+
+            <div class="page-title">
+              <div class="title_left">
+                <h4>Perfil de Usuario</h4>
+              </div>
+
+              <div class="title_right">
+                <div class="  form-group pull-right ">
+                  <div class="input-group">
+                    <button class="btn btn-primary btn-sm btn-round"  data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fa fa-plus" aria-hidden="true"></i> NUEVO PERFIL</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
             <div class="row">
-              <div class="col-md-12">
-                  <div class="box">
-                    <div class="box-header with-border">
-                    <h1 class="box-title">PERFIL  </h1>
-                        <div class="box-tools pull-right">
-                        <button class="btn btn-primary btn-flat" id="btnagregar" onclick="limpiar()" data-toggle="modal" data-target=".myModal"><i class="fa fa-plus-circle"></i> NUEVO PERFIL</button>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- centro -->
-                    <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
-                          <thead class="bg-primary">
-                            <th>N°</th>
-                            <th>DESCRIPCION</th>
-                            <th>OPCIONES</th>
-                          </thead>
-                          <tbody>                            
-                          </tbody>
+              <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Lista de Perfiles</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Settings 1</a>
+                            <a class="dropdown-item" href="#">Settings 2</a>
+                          </div>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  <table id="datatable-responsive" class="table table-bordered   dt-responsive nowrap table-sm" cellspacing="0" width="100%">
+                      <thead style="background-color:#2A3F54; color:white">
+                        <tr>
+                          <th>N°</th>
+                          <th>PERFIL</th>
+                          <th>OPCIONES</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                       
                         
-                        </table>
+                      </tbody>
+                    </table>
+                  
+                  
                     </div>
-                   
-                    <!--Fin centro -->
-                  </div><!-- /.box -->
-              </div><!-- /.col -->
-          </div><!-- /.row -->
-      </section><!-- /.content -->
-
-    </div><!-- /.content-wrapper -->
-  <!--Fin-Contenido-->
-
-  <div class="myModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+<!---moda perfil-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
     <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">PERFIL</h4>
+      <div class="modal-header " style="background-color:#2A3F54; color:white">
+        <h6 class="modal-title" id="exampleModalLabel">PERFIL DE USUARIO</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
-        <form action="" id="formulario">
+  <form action="" id="frm_perfil">
           <div class="row">
             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <label>DESCRIPCION:</label>
-                            <input type="hidden" name="idPerfil" id="idPerfil">
-                            <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="50" placeholder="descripcion" required>
+          <label for="">INGRESE PERFIL(*)</label>
+          <input type="hidden" name="id_profile" id="id_profile">
+            <input type="text" class="form-control text-uppercase" name="nombre_profile" id="nombre_profile" require >
+           
                           </div>
           </div>
-           
-       
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-         <button class="btn btn-primary btn-flat" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
+        <button type="button" class="btn btn-danger btn-round btn-sm" data-dismiss="modal" onclick="limpiar()"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar</button>
+        <button type="button" class="btn btn-primary btn-round btn-sm" id="btn-guardarP"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
       </div>
-       </form>
+  </form>
     </div>
   </div>
 </div>
 <?php
-}
-else
-{
-  require 'noacceso.php';
-}
-
-require 'footer.php';
+ include '../views/footer.php';
 ?>
-<script type="text/javascript" src="scripts/perfil.js"></script>
-<?php 
-}
-ob_end_flush();
-?>
-
-
+<script src="scripts/perfil.js"></script>
