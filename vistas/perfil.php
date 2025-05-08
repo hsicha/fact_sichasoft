@@ -6,7 +6,7 @@
 
             <div class="page-title">
               <div class="title_left">
-                <h4>Perfil de Usuario</h4>
+                <h4>Perfil</h4>
               </div>
 
               <div class="title_right">
@@ -94,6 +94,8 @@
   </div>
 </div>
 <?php
- include '../views/footer.php';
+
+ require 'footer.php';
+ 
 ?>
 <script src="scripts/perfil.js"></script>

@@ -52,7 +52,7 @@ function cancelarform()
 //Función Listar
 function listar()
 {
-	tabla = $("#tbllistado").DataTable({
+	tabla = $("#datatable-responsive").DataTable({
 		bLengthChange: true,
 		autoWidth: false,
 		 bDestroy: true,
