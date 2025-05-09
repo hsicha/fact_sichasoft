@@ -11,12 +11,12 @@
  </style>
 
 
-     <footer>
-         <div class="pull-right">
-            <a href="https://sichasoft.com"></a>
-         </div>
-         <div class="clearfix"></div>
-     </footer>
+<footer>
+          <div class="pull-right">
+            sichasoft<a href="https://colorlib.com"></a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
 
 
      <!-- jQuery -->

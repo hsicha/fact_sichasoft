@@ -42,7 +42,7 @@ if(!isset($_SESSION["nombre"])){
                     $data[]=array(                       
                     "0"=>$reg->nro,
                     "1"=>$reg->desc_perfil,
-                    "2"=>'<span class="label bg-primary flat text-center"><a style="color:white;cursor:pointer"  onclick="mostrar('.$reg->id_perfil.')"><i class="fa fa-edit"></i></a></span>'." ".
+                    "2"=>'<span class="badge badge-primary text-white"><a style="color:white;cursor:pointer"  onclick="mostrar('.$reg->id_perfil.')"><i class="fa fa-edit"></i></a> Editar</span>'." ".
                     '<span class="label bg-red flat text-center"><a style="color:white;cursor:pointer"  onclick="elimianr_perfil('.$reg->id_perfil.')"><i class="fa fa-trash" aria-hidden="true"></i></a></span>'
                     );
                 }
